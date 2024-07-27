@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6379:6379"
+
+  python:
+    build:
+      context: .
+      dockerfile: Dockerfile    
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./test:/test
+    depends_on:
+      - redis
